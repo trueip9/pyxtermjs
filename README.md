@@ -6,6 +6,7 @@
 Clone this repository, enter the `pyxtermjs` directory, then run:
 
 ```
+change string #38 in app.py
 python3 -m venv venv  # must be python3.6+
 venv/bin/pip install -r requirements.txt
 venv/bin/python -m pyxtermjs
