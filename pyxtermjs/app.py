@@ -35,7 +35,7 @@ def read_and_forward_pty_output():
             (data_ready, _, _) = select.select([app.config["fd"]], [], [], timeout_sec)
             if data_ready:
                 output = os.read(app.config["fd"], max_read_bytes).decode()
-                socketio.emit("pty-output", {"output": output}, namespace="/pty")
+                socketio.emit("pty-output", {"output": output}, namespace="/pty")# add to "pty_output" string licence number like "pty-output_1223455455455" 
 
 
 @app.route("/")
@@ -83,7 +83,7 @@ def connect():
         cmd = " ".join(shlex.quote(c) for c in app.config["cmd"])
         print("child pid is", child_pid)
         print(
-            f"starting background task with command `{cmd}` to continously read "
+            "starting background task with command `{cmd}` to continously read "
             "and forward pty output to client"
         )
         socketio.start_background_task(target=read_and_forward_pty_output)
@@ -114,7 +114,7 @@ def main():
     if args.version:
         print(__version__)
         exit(0)
-    print(f"serving on http://127.0.0.1:{args.port}")
+    print("serving on http://127.0.0.1:{args.port}")
     app.config["cmd"] = [args.command] + shlex.split(args.cmd_args)
     socketio.run(app, debug=args.debug, port=args.port, host=args.host)
 
